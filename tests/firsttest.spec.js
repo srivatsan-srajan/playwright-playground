@@ -25,7 +25,7 @@ test('Handle child window', async ({browser})=>
  
  });
 
- test.only('Place & Verify Product Order', async ({ page }) => {
+ test('Place & Verify Product Order', async ({ page }) => {
    //js file- Login js, DashboardPage
    const email = "anshika@gmail.com";
    const productName = 'ZARA COAT 3';
