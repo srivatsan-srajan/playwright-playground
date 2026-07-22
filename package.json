@@ -1,0 +1,23 @@
+{
+  "name": "playwright-playground",
+  "version": "1.0.0",
+  "description": "> A hands-on Playwright cookbook featuring practical recipes, real-world automation scenarios, best practices, and engineering insights.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srivatsan-srajan/playwright-playground.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/srivatsan-srajan/playwright-playground/issues"
+  },
+  "homepage": "https://github.com/srivatsan-srajan/playwright-playground#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1"
+  }
+}
