@@ -1,27 +1,23 @@
-// =========================================================
-// Enterprise Playwright Recipe
-// =========================================================
-//
-// Sections:
-// - Objective
-// - Best Practices
-// - Interview Notes
-// - Exercise
-//
-// =========================================================
-
-
 import { test, expect } from '@playwright/test';
 
-test('Role locators', async ({ page }) => {
+test('Role Locators 1', async ({ page }) => {
   await page.goto('https://playwright.dev');
 
-  const link = page.getByRole('link', { name: 'Get started' });
+  // get all images on the page
+  const images = page.getByRole('img');
+  for (const image of await images.all()) {
+    console.log(await image.getAttribute('alt'));
+  }
+  await expect(images).toHaveCount(20);
 
-  await expect(link).toBeVisible();
-  await link.click();
+});
 
-  await expect(page).toHaveURL(/intro/);
+test('Role Locators 2', async ({ page }) => {
+   // locate a tag by link and click it
+  await page.goto('https://demo.realworld.show/');
+  await page.getByRole('link', { name: 'ai', exact: true }).click();
+  
+  
 });
 
 /*

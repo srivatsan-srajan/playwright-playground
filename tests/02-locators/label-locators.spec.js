@@ -1,26 +1,28 @@
-// =========================================================
-// Enterprise Playwright Recipe
-// =========================================================
-//
-// Sections:
-// - Objective
-// - Best Practices
-// - Interview Notes
-// - Exercise
-//
-// =========================================================
-
-
 import { test, expect } from '@playwright/test';
+import { assert } from 'node:console';
 
 test('Label locators', async ({ page }) => {
-  await page.setContent(`
-    <label>Email <input type="email"></label>
-    <label>Password <input type="password"></label>
-  `);
+let pageURL = "https://rahulshettyacademy.com/angularpractice/";
 
-  await page.getByLabel('Email').fill('foo@test.com');
-  await page.getByLabel('Password').fill('secret');
+await page.goto(pageURL);
 
-  await expect(page.getByLabel('Email')).toHaveValue('foo@test.com');
+// identify a component by label and intelligently click it 
+
+// checkbox & radio
+await page.getByLabel("Check me out if you Love IceCreams!").check();
+await page.getByLabel("Student").check();
+
+// identify drodown by label and selectOption
+await page.getByLabel("Gender").selectOption("Male");
+
+// verify selection
+await expect(page.getByLabel("Check me out if you Love IceCreams!")).toBeChecked();
+await expect (page.getByLabel("Student")).toBeChecked();
+await expect(page.getByLabel("Gender")).toHaveValue("Male");
+  
 });
+
+/**
+ *  getByLabel is not efficient for ui controls that need to be typed in to, like textBoxes
+ * apply when click action is involved on the resultant component
+ */

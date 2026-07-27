@@ -1,22 +1,9 @@
-// =========================================================
-// Enterprise Playwright Recipe
-// =========================================================
-//
-// Sections:
-// - Objective
-// - Best Practices
-// - Interview Notes
-// - Exercise
-//
-// =========================================================
-
-
 import { test, expect } from '@playwright/test';
 
 test('filter()', async ({ page }) => {
-  await page.setContent('<button>Save</button><button>Cancel</button>');
+  page.goto('https://rahulshettyacademy.com/angularpractice/shop');
 
-  const save = page.getByRole('button').filter({ hasText: 'Save' });
+  await page.locator('app-card').filter({ hasText: 'Nokia Edge' }).getByRole('button').click();
 
-  await expect(save).toBeVisible();
+  
 });

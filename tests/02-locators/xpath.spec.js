@@ -1,16 +1,3 @@
-// =========================================================
-// Enterprise Playwright Recipe
-// =========================================================
-//
-// Sections:
-// - Objective
-// - Best Practices
-// - Interview Notes
-// - Exercise
-//
-// =========================================================
-
-
 import { test, expect } from '@playwright/test';
 
 test('XPath', async ({ page }) => {
