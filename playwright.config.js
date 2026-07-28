@@ -13,8 +13,10 @@ export default defineConfig({
   reporter: 'html',
  
   use: {
-    browserName: 'firefox',
+    browserName: 'chromium',
     headless: false,
+    screenshot: 'only-on-failure',
+    trace: 'retain-on-failure',
   },
 
   

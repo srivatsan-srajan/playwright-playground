@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.only('handle popup window', async ({ page, context }) => {
+test('handle popup window', async ({ page, context }) => {
 
   await page.goto('https://example.com');
 

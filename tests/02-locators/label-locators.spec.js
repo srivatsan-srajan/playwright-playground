@@ -25,4 +25,6 @@ await expect(page.getByLabel("Gender")).toHaveValue("Male");
 /**
  *  getByLabel is not efficient for ui controls that need to be typed in to, like textBoxes
  * apply when click action is involved on the resultant component
+ * 
+ * works in a text component if its properly grouped or if the for/id attributes match
  */
