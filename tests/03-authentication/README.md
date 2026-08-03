@@ -1,119 +1,390 @@
 # Authentication
 
-Authentication is one of the most common scenarios in UI automation. This section covers login, logout, session management, authentication state, and related best practices.
+> Engineering Cookbook – Chapter 03
+
+Authentication is one of the most common workflows automated in UI testing. Almost every web application requires users to authenticate before accessing business functionality, making login and registration scenarios foundational automation skills.
+
+This chapter demonstrates how to automate authentication workflows using Playwright while following engineering best practices that keep tests reliable, readable, and maintainable.
 
 ---
 
-## What You'll Learn
+# Who Should Read This Chapter?
 
-- Successful Login
-- Invalid Login
-- Session Persistence
-- Storage State
-- Multiple User Sessions
-- Authentication Helpers
+✅ Engineers learning Playwright
+
+✅ Selenium engineers migrating to Playwright
+
+✅ QA engineers building automation frameworks
+
+✅ Interview candidates preparing for Playwright questions
 
 ---
 
-## Playwright APIs Used
+# Learning Objectives
 
-- page.goto()
-- page.locator()
-- locator.fill()
-- locator.click()
-- expect()
-- browser.newContext()
+After completing this chapter you should be able to:
+
+- Automate login forms
+- Validate authentication failures
+- Register new users
+- Verify successful authentication
+- Build reusable authentication helpers
+- Design reliable authentication tests
+
+---
+
+# Authentication Lifecycle
+
+Every application follows a similar authentication journey.
+
+```
+User
+
+↓
+
+Registration
+
+↓
+
+Login
+
+↓
+
+Authenticated Session
+
+↓
+
+Business Actions
+
+↓
+
+Logout
+```
+
+This chapter covers the first three stages.
+
+Future chapters will extend this to authenticated business workflows.
+
+---
+
+# Recipes Included
+
+| Recipe | Purpose |
+|----------|---------|
+| `invalid-login.spec.js` | Validate incorrect credentials and verify the appropriate error message is displayed. |
+| `successful-login.spec.js` | Authenticate with valid credentials and verify that the application successfully loads authenticated content. |
+| `register-login.spec.js` | Register a brand-new user and immediately log in using the newly created account. |
+
+---
+
+# Authentication Concepts Covered
+
+## Navigation
+
+Every authentication flow begins with navigation.
+
+Examples include:
+
+- Opening login pages
+- Opening registration pages
+- Returning to login after successful registration
+
+---
+
+## Form Automation
+
+This chapter demonstrates automation of common form controls including:
+
+- Text boxes
+- Password fields
+- Checkboxes
+- Radio buttons
+- Dropdown lists
+
+These same techniques apply throughout the rest of the repository.
+
+---
+
+## Negative Authentication
+
+Negative tests are just as important as successful login tests.
+
+Typical validations include:
+
+- Invalid username
+- Invalid password
+- Missing credentials
+- Incorrect error messages
+
+Example:
+
+```
+Username: rahulshettyacademy
+Password: wrongpassword
+
+↓
+
+Expected Result
+
+Incorrect username/password.
+```
+
+---
+
+## Successful Authentication
+
+A successful login test should verify more than simply clicking the Login button.
+
+Typical assertions include:
+
+- Correct page title
+- Dashboard visibility
+- User-specific content
+- Product listings
+- Navigation options
+
+Avoid validating implementation details.
+
+Always validate business outcomes.
+
+---
+
+## Registration Workflow
+
+Registration is a complete business workflow.
+
+Your example demonstrates:
+
+- User Registration
+- Personal Details
+- Password Creation
+- Terms Acceptance
+- Login using newly created account
+
+This is a much stronger automation example than simply testing a login form.
+
+---
+
+# Engineering Insights
+
+## Authentication Tests Should Test Authentication
+
+Avoid this:
+
+```
+Login
+
+↓
+
+Add Product
+
+↓
+
+Checkout
+
+↓
+
+Create Order
+
+↓
+
+Download Invoice
+
+↓
+
+Logout
+```
+
+This is testing five business features in one test.
+
+Instead:
+
+Authentication tests should focus on authentication.
+
+Business workflows belong in separate tests.
+
+---
+
+## Generate Unique Test Data
+
+Registration tests should avoid hardcoded users.
+
+Instead generate:
+
+- Unique email addresses
+- Random usernames
+- Dynamic phone numbers
+
+This keeps registration tests repeatable.
+
+---
+
+## Reuse Login Logic
+
+As your framework grows, move login into reusable helper methods.
+
+Example:
+
+```javascript
+await login(page, email, password);
+```
+
+instead of repeating the same login steps across every test.
+
+---
+
+# Best Practices
+
+✔ Keep login tests independent
+
+✔ Use meaningful test names
+
+✔ Store credentials outside source code
+
+✔ Assert business behaviour
+
+✔ Avoid hard-coded waits
+
+✔ Create reusable authentication helpers
+
+---
+
+# Common Mistakes
+
+❌ Using `waitForTimeout()`
+
+❌ Reusing the same registration account
+
+❌ Hardcoding credentials in multiple files
+
+❌ Combining authentication with unrelated business scenarios
+
+❌ Verifying only URL changes instead of authenticated state
+
+---
+
+# Selenium vs Playwright
+
+| Selenium | Playwright |
+|------------|------------|
+| WebDriver | BrowserContext |
+| findElement() | Locator |
+| WebElement | Locator |
+| Explicit Wait | Auto Waiting |
+| Thread.sleep() | Retryable Assertions |
+
+Playwright dramatically reduces flakiness by combining lazy locators, actionability checks, and retryable assertions.
+
+---
+
+# Interview Corner
+
+## Why shouldn't every test perform UI login?
+
+Authentication is usually not the feature under test.
+
+Business scenario tests should often begin with an authenticated session using:
+
 - storageState()
+- API Login
+- Authentication Fixtures
+
+This reduces execution time and unnecessary failures.
 
 ---
 
-## Best Practices
+## What should an authentication test verify?
 
-- Prefer web-first assertions.
-- Avoid explicit waits.
-- Keep credentials outside test code.
-- Reuse authentication state when appropriate.
-- Use meaningful locator names.
+A complete authentication test validates:
 
----
-
-## Common Mistakes
-
-- Using `waitForTimeout()`
-- Hard-coded sleeps
-- Brittle XPath locators
-- Duplicating login code across tests
+- Successful authentication
+- Failed authentication
+- Error handling
+- Session creation
+- Landing page
+- User-specific content
 
 ---
 
-## FAQ
+## Why are Playwright login tests generally more reliable?
 
-### Why use `expect(locator).toHaveText()` instead of `locator.textContent()`?
+Because Playwright automatically waits for:
 
-`toHaveText()` is a **web-first assertion**. It automatically retries until the expected text appears (or the timeout expires), making tests significantly more reliable.
+- Element visibility
+- Element stability
+- Navigation
+- Assertions
 
-`textContent()` retrieves the current value immediately. If the UI hasn't finished updating, the test may fail even though the application is working correctly.
-
-**Preferred**
-
-```javascript
-await expect(errorMessage).toHaveText("Incorrect username/password.");
-```
-
-**Less Reliable**
-
-```javascript
-const text = await errorMessage.textContent();
-expect(text).toBe("Incorrect username/password.");
-```
+without requiring explicit waits.
 
 ---
 
-### Why is Playwright generally less flaky than Selenium?
+# FAQ
 
-Playwright was designed with modern web applications in mind. Some of the features that improve test stability include:
+## Should credentials be stored in Git?
 
-- Auto-waiting
-- Retryable assertions
-- Strict locators
-- Actionability checks before interactions
-- Built-in waiting for navigation and network events
+No.
 
-These reduce the need for explicit waits and make tests more deterministic.
+Use:
 
----
-
-### When should I use `browser.newContext()` instead of the built-in `page` fixture?
-
-Use the built-in `page` fixture for most tests.
-
-Create a new `BrowserContext` when you need:
-
-- Multiple independent users
-- Separate authentication states
-- Different browser permissions
-- Isolated cookies and local storage
+- `.env`
+- CI/CD Secrets
+- GitHub Secrets
 
 ---
 
-### Should I use CSS, XPath, or `getByRole()`?
+## Should login be repeated in every test?
 
-General recommendation:
+Not necessarily.
 
-1. `getByRole()`
-2. `getByLabel()`
-3. `getByPlaceholder()`
-4. CSS selectors
-5. XPath (only when necessary)
+Authentication itself should be tested thoroughly.
 
-This order usually results in the most readable and maintainable tests.
+Other business workflows can reuse authenticated sessions.
 
 ---
 
-## Recipes
+## Why is BrowserContext useful for authentication?
 
-| Recipe | Description |
-|---------|-------------|
-| invalid-login.spec.js | Verify invalid login |
-| successful-login.spec.js | Successful authentication |
-| session-state.spec.js | Reuse authenticated session |
+Every BrowserContext has its own:
+
+- Cookies
+- Local Storage
+- Session Storage
+
+making tests isolated and parallel-friendly.
+
+---
+
+# Future Recipes
+
+This chapter will eventually include:
+
+- Logout
+- Forgot Password
+- Reset Password
+- API Login
+- storageState()
+- OAuth Login
+- Single Sign-On (SSO)
+- Multi-Factor Authentication (MFA)
+- Cookie Authentication
+
+---
+
+# Summary
+
+This chapter introduced the complete authentication lifecycle:
+
+- Negative Login
+- Successful Login
+- User Registration
+- Authentication Best Practices
+- Reliable Form Automation
+
+These workflows form the foundation for every authenticated business scenario you'll automate later in the repository.
+
+---
+
+➡ **Next Chapter:** Assertions
+
+You'll learn how to build reliable, web-first validations using Playwright's retryable assertion library.
