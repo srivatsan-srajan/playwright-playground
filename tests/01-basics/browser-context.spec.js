@@ -14,8 +14,8 @@ test('independent browser contexts', async ({ browser }) => {
   await expect(adminPage).toHaveTitle(/Example/);
   await expect(customerPage).toHaveTitle(/Playwright/);
 
-  await admin.close();
-  await customer.close();
+  await adminContext.close();
+  await customerContext.close();
 
 });
 

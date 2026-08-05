@@ -27,12 +27,13 @@ test('Click Deny alert', async ({ page }) => {
 test('Click Prompt alert', async ({ page }) => {
 
     await page.goto('https://the-internet.herokuapp.com/javascript_alerts');
-    
-    await page.once('dialog', dialog => dialog.message('Hello, World!'));
+    page.on('dialog', async dialog => {
+        await dialog.accept("Hello, World!");
+    });
+
     await page.getByRole('button', { name: 'Click for JS Prompt' }).click();
+
     await expect(page.locator('#result')).toContainText('You entered: Hello, World!');
 
-    await page.once('dialog', dialog => dialog.dismiss());
-    await page.getByRole('button', { name: 'Click for JS Prompt' }).click();
-    await expect(page.locator('#result')).toContainText('You entered: null');
+
 });

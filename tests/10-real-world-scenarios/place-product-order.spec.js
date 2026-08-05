@@ -2,17 +2,18 @@ const { test, expect } = require("@playwright/test");
 
 test('e2e-version1', async ({ page }) => {
    //js file- Login js, DashboardPage
-   const email = "anshika@gmail.com";
-   const productName = 'ZARA COAT 3';
+   const email = process.env.EMAIL;
+   const password = process.env.PASSWORD;
+   const productName = 'ADIDAS ORIGINAL';
    const products = page.locator(".card-body");
    await page.goto("https://rahulshettyacademy.com/client");
    await page.locator("#userEmail").fill(email);
-   await page.locator("#userPassword").fill("Iamking@000");
+   await page.locator("#userPassword").fill(password);
    await page.locator("[value='Login']").click();
    await expect(page.locator(".card-body").first()).toBeVisible();
    await page.locator(".card-body b").first().waitFor();
    const titles = await page.locator(".card-body b").allTextContents();
-   console.log(titles);
+   
    const count = await products.count();
    for (let i = 0; i < count; ++i) {
       if (await products.nth(i).locator("b").textContent() === productName) {
@@ -26,7 +27,7 @@ test('e2e-version1', async ({ page }) => {
    //await page.pause();
 
    await page.locator("div li").first().waitFor();
-   const bool = await page.locator("h3:has-text('ZARA COAT 3')").isVisible();
+   const bool = await page.locator("h3:has-text('ADIDAS ORIGINAL')").isVisible();
    expect(bool).toBeTruthy();
    await page.locator("text=Checkout").click();
 
@@ -46,7 +47,7 @@ test('e2e-version1', async ({ page }) => {
    await page.locator(".action__submit").click();
    await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
    const orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
-   console.log(orderId);
+   
 
    await page.locator("button[routerlink*='myorders']").click();
    await page.locator("tbody").waitFor();
@@ -67,12 +68,13 @@ test('e2e-version1', async ({ page }) => {
 
 test('e2e-version2', async ({ page }) => {
    //js file- Login js, DashboardPage
-   const email = "anshika@gmail.com";
+   const email = process.env.EMAIL;
+   const password = process.env.PASSWORD;
    const productName = 'ZARA COAT 3';
    const products = page.locator(".card-body");
    await page.goto("https://rahulshettyacademy.com/client");
    await page.getByPlaceholder("email@example.com").fill(email);
-   await page.getByPlaceholder("enter your passsword").fill("Iamking@000");
+   await page.getByPlaceholder("enter your passsword").fill(password);
    await page.getByRole('button', { name: "Login" }).click();
    await page.waitForLoadState('networkidle');
    await page.locator(".card-body b").first().waitFor();

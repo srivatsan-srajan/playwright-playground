@@ -1,5 +1,6 @@
 const ExcelJs = require('exceljs');
 const { test, expect } = require('@playwright/test');
+const path = require('path');
 
 async function writeExcelTest(searchText, replaceText, change, filePath) {
   const workbook = new ExcelJs.Workbook();
@@ -34,7 +35,7 @@ test('Upload download excel validation', async ({ page }) => {
 
   await page.goto('https://rahulshettyacademy.com/upload-download-test/index.html');
   
-  const filePath = path.join(__dirname, '../resources/download.xlsx');
+  const filePath = path.join(__dirname, '../../resources/excel-sample.xlsx');
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Download' }).click();
   const download = await downloadPromise;

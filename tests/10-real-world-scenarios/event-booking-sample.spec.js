@@ -14,8 +14,8 @@ import { test, expect } from '@playwright/test';
 const BASE_URL = 'https://eventhub.rahulshettyacademy.com';
 
 const USER = {
-  email: 'foo@bar.com',
-  password: 'Foob@r123'
+  email: process.env.EVENT_EMAIL,
+  password: process.env.EVENT_PASSWORD,
 };
 
 const BOOKING = {

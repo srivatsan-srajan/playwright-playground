@@ -3,8 +3,8 @@ const { test, expect } = require("@playwright/test");
 test("Register & Login Flows", async ({ page }) => {
     //open portal and click on register
     const loginPage = "https://rahulshettyacademy.com/client/#/auth/login";
-    const userEmail = `user${Date.now()}@example.com`;
-    const password = "foobar1%";
+    const userEmail = `user${Date.now()}@bar.com`;
+    const password = "Foobar1%";
 
     await page.goto(loginPage);
     await page.locator('.btn1').click();
@@ -20,14 +20,15 @@ test("Register & Login Flows", async ({ page }) => {
     await page.locator('#confirmPassword').fill(password);
     await page.locator("input[formcontrolname='required']").check();
     await page.locator('#login').click();
+    // needed for the user to be registered before login, otherwise the test will fail
+    await page.waitForTimeout(3000);
 
     // login
     await page.goto(loginPage);
     await page.locator('#userEmail').fill(userEmail);
     await page.locator('#userPassword').fill(password);
     await page.locator('#login').click();
-    await expect(
-        page.locator('.card-body')
-    ).toHaveCountGreaterThan(0);
-
+        
+    await expect(page.getByText('ADIDAS')).toBeVisible();
+    
 });

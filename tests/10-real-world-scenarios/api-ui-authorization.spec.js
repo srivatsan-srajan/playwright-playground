@@ -18,12 +18,12 @@ const API_URL = 'https://api.eventhub.rahulshettyacademy.com/api';
 
 const USERS = {
   yahoo: {
-    email: 'Use your own credentials - 1',
-    password: ''
+    email: process.env.EVENT_EMAIL_USER1,
+    password: process.env.EVENT_PASSWORD_USER1
   },
   gmail: {
-    email: 'Use your own credentials - 2',
-    password: ''
+    email: process.env.EVENT_EMAIL_USER2,
+    password: process.env.EVENT_PASSWORD_USER2
   }
 };
 
@@ -71,7 +71,7 @@ async function createBooking(request, token, eventId, user) {
     }
   });
 
-  expect(response.status()).toBe(200);
+  expect(response.status()).toBe(201);
 
   return (await response.json()).data.id;
 }

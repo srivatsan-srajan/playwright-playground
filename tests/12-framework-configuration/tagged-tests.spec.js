@@ -3,43 +3,51 @@ import { test, expect } from '@playwright/test';
 test.describe('User Authentication', () => {
 
   test('Successful login @smoke @regression', async ({ page }) => {
-    await page.goto('https://example.com/login');
+    await page.goto('https://the-internet.herokuapp.com/login');
 
-    await page.getByLabel('Email').fill('john@example.com');
-    await page.getByLabel('Password').fill('Password123');
+    await page.locator('#username').fill('tomsmith');
+    await page.locator('#password').fill('SuperSecretPassword!');
     await page.getByRole('button', { name: 'Login' }).click();
 
-    await expect(page).toHaveURL(/dashboard/);
+    await expect(page).toHaveURL(/secure/);
+    await expect(page.locator('#flash'))
+      .toContainText('You logged into a secure area!');
   });
 
   test('Invalid password @regression', async ({ page }) => {
-    await page.goto('https://example.com/login');
+    await page.goto('https://the-internet.herokuapp.com/login');
 
-    await page.getByLabel('Email').fill('john@example.com');
-    await page.getByLabel('Password').fill('WrongPassword');
+    await page.locator('#username').fill('tomsmith');
+    await page.locator('#password').fill('WrongPassword');
     await page.getByRole('button', { name: 'Login' }).click();
 
-    await expect(page.getByText('Invalid credentials')).toBeVisible();
+    await expect(page.locator('#flash'))
+      .toContainText('Your password is invalid!');
   });
 
-  test('Forgot Password @smoke', async ({ page }) => {
-    await page.goto('https://example.com/login');
+  test('Invalid username @sanity', async ({ page }) => {
+    await page.goto('https://the-internet.herokuapp.com/login');
 
-    await page.getByRole('link', { name: 'Forgot Password?' }).click();
+    await page.locator('#username').fill('invalidUser');
+    await page.locator('#password').fill('SuperSecretPassword!');
+    await page.getByRole('button', { name: 'Login' }).click();
 
-    await expect(page).toHaveURL(/forgot-password/);
+    await expect(page.locator('#flash'))
+      .toContainText('Your username is invalid!');
   });
 
-  test('Create new account @sanity @regression', async ({ page }) => {
-    await page.goto('https://example.com/register');
+  test('Logout after successful login @smoke', async ({ page }) => {
+    await page.goto('https://the-internet.herokuapp.com/login');
 
-    await page.getByLabel('Name').fill('John Doe');
-    await page.getByLabel('Email').fill('john@example.com');
-    await page.getByLabel('Password').fill('Password123');
+    await page.locator('#username').fill('tomsmith');
+    await page.locator('#password').fill('SuperSecretPassword!');
+    await page.getByRole('button', { name: 'Login' }).click();
 
-    await page.getByRole('button', { name: 'Register' }).click();
+    await page.getByRole('link', { name: 'Logout' }).click();
 
-    await expect(page).toHaveURL(/welcome/);
+    await expect(page).toHaveURL(/login/);
+    await expect(page.locator('#flash'))
+      .toContainText('You logged out of the secure area!');
   });
 
 });

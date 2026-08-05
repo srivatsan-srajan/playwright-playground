@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('Compare screenshot with baseline', async ({page})=>
+// this test is designed to fail, to demonstrate the screenshot comparison feature of Playwright
+test('Visual comparison - expected failure example', async ({page})=>
  {
     await page.goto('https://flightaware.com/');
     await expect(page).toHaveURL(/flightaware/);

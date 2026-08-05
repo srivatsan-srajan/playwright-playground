@@ -1,42 +1,63 @@
 import { test, expect, request } from '@playwright/test';
-const loginPayLoad = { userEmail: "anshika@gmail.com", userPassword: "Iamking@000" };
-const orderPayLoad = { orders: [{ country: "Cuba", productOrderedId: "67a8dde5c0d3e6622a297cc8" }] };
-const { ApiUtils } = require('./api-utils.spec.js');
+import { ApiUtils } from './api-utils.js';
 
+const BASE_URL = 'https://rahulshettyacademy.com/client';
+const PRODUCT_NAME = 'ZARA COAT 3';
 
-let response;
+const loginPayload = {
+    userEmail: process.env.EMAIL,
+    userPassword: process.env.PASSWORD
+};
+
+let orderResponse;
+
 test.beforeAll(async () => {
+    expect(loginPayload.userEmail).toBeTruthy();
+    expect(loginPayload.userPassword).toBeTruthy();
+
     const apiContext = await request.newContext();
-    const ApiUtils = new ApiUtils(apiContext, loginPayLoad);
-    response = await ApiUtils.createOrder(orderPayLoad);
+    const apiUtils = new ApiUtils(apiContext, loginPayload);
 
-})
+    orderResponse = await apiUtils.createOrder(PRODUCT_NAME);
+});
 
+test('@API Place the Order', async ({ page }) => {
 
-//create order is success
-test('@API Place the order', async ({ page }) => {
-    await page.addInitScript(value => {
+    // Inject the authentication token before the application loads.
+    await page.addInitScript(token => {
+        window.localStorage.setItem('token', token);
+    }, orderResponse.token);
 
-        window.localStorage.setItem('token', value);
-    }, response.token);
-    await page.goto("https://rahulshettyacademy.com/client");
+    await page.goto(BASE_URL);
+
     await page.locator("button[routerlink*='myorders']").click();
-    await page.locator("tbody").waitFor();
-    const rows = await page.locator("tbody tr");
 
+    await expect(
+        page.locator('tbody')
+    ).toBeVisible();
 
-    for (let i = 0; i < await rows.count(); ++i) {
-        const rowOrderId = await rows.nth(i).locator("th").textContent();
-        if (response.orderId.includes(rowOrderId)) {
-            await rows.nth(i).locator("button").first().click();
+    const rows = page.locator('tbody tr');
+
+    for (let i = 0; i < await rows.count(); i++) {
+
+        const rowOrderId = await rows
+            .nth(i)
+            .locator('th')
+            .textContent();
+
+        if (rowOrderId?.includes(orderResponse.orderId)) {
+
+            await rows
+                .nth(i)
+                .getByRole('button', { name: 'View' })
+                .click();
+
             break;
         }
     }
-    const orderIdDetails = await page.locator(".col-text").textContent();
-    //await page.pause();
-    expect(orderIdDetails).toContain(response.orderId);
+
+    await expect(
+        page.locator('.col-text')
+    ).toContainText(orderResponse.orderId);
 
 });
-
-//Verify if order created is showing in history page
-// Precondition - create order -

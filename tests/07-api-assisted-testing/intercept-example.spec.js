@@ -1,20 +1,48 @@
-import { test, expect, request } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
+const BASE_URL = 'https://rahulshettyacademy.com/client';
+const INVALID_ORDER_ID = '621661f884b053f6765465b6'; // Order belonging to another user
 
-test('@QW Security test request intercept', async ({ page }) => {
+test('@QW Security - Request Interception', async ({ page }) => {
 
-    //login and reach orders page
-    await page.goto("https://rahulshettyacademy.com/client");
-    await page.locator("#userEmail").fill("anshika@gmail.com");
-    await page.locator("#userPassword").fill("Iamking@000");
+    const userEmail = process.env.EMAIL;
+    const password = process.env.PASSWORD;
+
+    // Validate environment variables
+    expect(userEmail).toBeTruthy();
+    expect(password).toBeTruthy();
+
+    // Login
+    await page.goto(BASE_URL);
+
+    await page.locator('#userEmail').fill(userEmail);
+    await page.locator('#userPassword').fill(password);
     await page.locator("[value='Login']").click();
-    await page.waitForLoadState('networkidle');
-    await page.locator(".card-body b").first().waitFor();
 
+    // Wait for dashboard to load
+    await expect(
+        page.locator('.card-body').first()
+    ).toBeVisible();
+
+    // Navigate to Orders
     await page.locator("button[routerlink*='myorders']").click();
-    await page.route("https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=*",
-        route => route.continue({ url: 'https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=621661f884b053f6765465b6' }))
-    await page.locator("button:has-text('View')").first().click();
-    await expect(page.locator("p").last()).toHaveText("You are not authorize to view this order");
 
-})
+    // Intercept the request and replace the order id
+    await page.route(
+        '**/api/ecom/order/get-orders-details?id=*',
+        async route => {
+            await route.continue({
+                url: `https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=${INVALID_ORDER_ID}`
+            });
+        }
+    );
+
+    // Attempt to view the order
+    await page.getByRole('button', { name: 'View' }).first().click();
+
+    // Verify authorization failure
+    await expect(
+        page.getByText('You are not authorize to view this order')
+    ).toBeVisible();
+
+});

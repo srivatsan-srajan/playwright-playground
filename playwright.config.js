@@ -1,4 +1,5 @@
 // @ts-check
+require('dotenv').config({ path: 'resources/.env.qa' });
 import { defineConfig, devices } from '@playwright/test';
 
 /**

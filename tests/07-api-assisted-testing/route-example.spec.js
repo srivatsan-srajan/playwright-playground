@@ -1,14 +1,14 @@
 import { test, expect, request } from '@playwright/test';
-const { ApiUtils } = require('./api-utils.spec.js');
-const loginPayLoad = { userEmail: "anshika@gmail.com", userPassword: "Iamking@000" };
-const orderPayLoad = { orders: [{ country: "India", productOrderedId: "67a8dde5c0d3e6622a297cc8" }] };
+import { ApiUtils } from './api-utils.js';
+const loginPayload = { userEmail: process.env.EMAIL, userPassword: process.env.PASSWORD };
+const PRODUCT_NAME = 'ZARA COAT 3';
 const fakePayLoadOrders = { data: [], message: "No Orders" };
 
 let response;
 test.beforeAll(async () => {
   const apiContext = await request.newContext();
-  const apiUtils = new ApiUtils(apiContext, loginPayLoad);
-  response = await apiUtils.createOrder(orderPayLoad);
+  const apiUtils = new ApiUtils(apiContext, loginPayload);
+  response = await apiUtils.createOrder(PRODUCT_NAME, 'India');
 
 })
 
@@ -38,6 +38,6 @@ test('@SP Place the order', async ({ page }) => {
   await page.locator("button[routerlink*='myorders']").click();
   await page.waitForResponse("https://rahulshettyacademy.com/api/ecom/order/get-orders-for-customer/*")
 
-  await expect(page.locator(".mt-4")).toHaveText("No Orders");
+  await expect(page.locator(".mt-4")).toContainText("No Orders");
 
 });

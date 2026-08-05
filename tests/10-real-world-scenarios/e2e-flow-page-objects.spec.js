@@ -4,14 +4,15 @@ const { POManager } = require('../11-page-objects/POManager');
 
 test('Client App login', async ({ page }) => {
   const poManager = new POManager(page);
-  //js file- Login js, DashboardPage
-  const username = "anshika@gmail.com";
-  const password = "Iamking@000"
-  const productName = 'Zara Coat 4';
-  const products = page.locator(".card-body");
+  const username = process.env.EMAIL;
+  const password = process.env.PASSWORD;
+
   const loginPage = poManager.getLoginPage();
+  const productName = 'ADIDAS ORIGINAL';
+  
   await loginPage.goTo();
   await loginPage.validLogin(username, password);
+  
   const dashboardPage = poManager.getDashboardPage();
   await dashboardPage.searchProductAddCart(productName);
   await dashboardPage.navigateToCart();
