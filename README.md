@@ -148,6 +148,9 @@ View HTML report
 npm run report
 ```
 
+> [!NOTE]
+> Most examples run out of the box. Tests that interact with authenticated demo applications require valid credentials in `resources/.env.qa` before they can be executed successfully.
+
 ---
 
 ## Repository Philosophy
