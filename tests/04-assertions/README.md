@@ -1,60 +1,5 @@
 # Assertions
 
-> Engineering Cookbook – Chapter 04
-
-Assertions are the heart of every automated test.
-
-A test without meaningful assertions is simply a script that performs actions. Assertions transform browser interactions into automated verification by confirming that the application behaves exactly as expected.
-
-Playwright provides one of the most powerful assertion libraries available in UI automation through **web-first assertions**, automatic retries, and built-in synchronization.
-
----
-
-# Who Should Read This Chapter?
-
-✅ Engineers learning Playwright
-
-✅ Selenium engineers migrating to Playwright
-
-✅ Automation engineers building maintainable frameworks
-
-✅ Interview candidates preparing for Playwright questions
-
----
-
-# Learning Objectives
-
-After completing this chapter you should be able to:
-
-- Understand Playwright's assertion model
-- Differentiate between standard and web-first assertions
-- Validate page state reliably
-- Use soft assertions
-- Verify API responses
-- Write robust, non-flaky validations
-
----
-
-# Why Assertions Matter
-
-Automation consists of two parts:
-
-```
-Action
-
-↓
-
-Verification
-```
-
-Without verification, automation provides little confidence.
-
-Good assertions answer one question:
-
-> **Did the application behave correctly?**
-
----
-
 # Assertion Categories
 
 This chapter covers four major assertion categories.
@@ -270,77 +215,6 @@ This allows API validation without opening a browser.
 
 ---
 
-# Engineering Insights
-
-## Assert Business Behaviour
-
-Don't assert implementation details.
-
-Good
-
-```
-Order created successfully
-```
-
-Poor
-
-```
-Button clicked
-```
-
----
-
-## Avoid Duplicate Assertions
-
-Each assertion should provide new information.
-
-Five assertions checking the same thing add maintenance without improving confidence.
-
----
-
-## Prefer Web-First Assertions
-
-Good
-
-```javascript
-await expect(locator).toBeVisible();
-```
-
-Avoid
-
-```javascript
-await page.waitForTimeout(5000);
-expect(...)
-```
-
----
-
-# Best Practices
-
-✔ Assert outcomes, not clicks
-
-✔ Prefer retryable assertions
-
-✔ Use soft assertions selectively
-
-✔ Keep assertions readable
-
-✔ One business expectation per assertion
-
----
-
-# Common Mistakes
-
-❌ Using `textContent()` instead of `toHaveText()`
-
-❌ Comparing element values manually
-
-❌ Using hard waits
-
-❌ Writing assertions that duplicate each other
-
----
-
 # Selenium vs Playwright
 
 | Selenium | Playwright |
@@ -354,7 +228,7 @@ One of Playwright's biggest advantages is that assertions automatically synchron
 
 ---
 
-# Interview Corner
+# FAQ
 
 ## Why are Playwright assertions less flaky?
 
@@ -385,8 +259,6 @@ They understand browser timing and automatically wait for elements to become act
 
 ---
 
-# FAQ
-
 ## Why shouldn't I use `waitForTimeout()`?
 
 Because browser timing changes.
@@ -406,33 +278,3 @@ Most UI tests primarily use:
 - `toHaveCount()`
 
 ---
-
-# Future Recipes
-
-As this repository grows, this chapter will include:
-
-- `expect.poll()`
-- `expect.toPass()`
-- Snapshot assertions
-- Visual assertions
-- Accessibility assertions
-- Custom matchers
-
----
-
-# Summary
-
-This chapter introduced the most commonly used Playwright assertions, including:
-
-- Standard assertions
-- Retryable UI assertions
-- Soft assertions
-- API assertions
-
-Well-designed assertions are one of the biggest contributors to stable, maintainable automation suites.
-
----
-
-➡ **Next Chapter:** UI Controls
-
-You'll learn how to automate common user interface components such as dropdowns, tables, alerts, frames, windows, and more.

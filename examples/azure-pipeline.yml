@@ -1,0 +1,43 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '22.x'
+  displayName: Install Node.js
+
+- script: |
+    npm ci
+  displayName: Install Dependencies
+
+- script: |
+    npx playwright install --with-deps
+  displayName: Install Playwright Browsers
+
+- script: |
+    npx playwright test
+  displayName: Run Playwright Tests
+
+- task: PublishTestResults@2
+  condition: always()
+  inputs:
+    testResultsFormat: JUnit
+    testResultsFiles: 'test-results/results.xml'
+    failTaskOnFailedTests: false
+
+- task: PublishBuildArtifacts@1
+  condition: always()
+  inputs:
+    PathtoPublish: 'playwright-report'
+    ArtifactName: 'playwright-report'
+
+- task: PublishBuildArtifacts@1
+  condition: always()
+  inputs:
+    PathtoPublish: 'test-results'
+    ArtifactName: 'test-results'

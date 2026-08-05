@@ -1,96 +1,5 @@
 # End-to-End Business Workflows
 
-> **Engineering Cookbook – Chapter 10**
-
-Real-world automation is rarely about clicking a button or validating a single page.
-
-Instead, automation engineers build tests that verify complete business workflows spanning multiple pages, backend services, authentication boundaries, external files, and business rules.
-
-This chapter combines the concepts introduced throughout the repository into production-style end-to-end scenarios that closely resemble enterprise automation projects.
-
-These examples demonstrate how individual Playwright features work together to validate real business behaviour.
-
----
-
-# Who Should Read This Chapter?
-
-✅ Senior Automation Engineers
-
-✅ SDETs
-
-✅ Framework Developers
-
-✅ QA Leads
-
-✅ Engineers preparing for Playwright interviews
-
----
-
-# Learning Objectives
-
-After completing this chapter you should be able to:
-
-- Design complete end-to-end business workflows
-- Combine UI and API automation
-- Validate authorization rules
-- Automate business-specific workflows
-- Apply reusable helper methods
-- Structure maintainable Playwright tests
-
----
-
-# What Makes an End-to-End Workflow?
-
-Unlike isolated examples, an end-to-end workflow validates an entire business journey.
-
-```
-Authentication
-
-↓
-
-Business Action
-
-↓
-
-Business Validation
-
-↓
-
-Application State Verification
-```
-
-These workflows provide confidence that the application behaves correctly from the user's perspective.
-
----
-
-# Architecture
-
-```
-Browser
-
-        │
-
-        ▼
-
-Reusable Helpers
-
-        │
-
-        ▼
-
-Business Workflow
-
-        │
-
-        ▼
-
-Assertions
-```
-
-Notice that browser interactions become only one part of a larger workflow.
-
----
-
 # Recipes Included
 
 | Recipe | Business Scenario |
@@ -201,96 +110,6 @@ These assertions verify application behaviour rather than implementation details
 
 ---
 
-# Engineering Insights
-
-## Tests Should Tell a Story
-
-Good end-to-end tests read like business documentation.
-
-Example:
-
-```
-Login
-
-↓
-
-Create Event
-
-↓
-
-Book Event
-
-↓
-
-Verify Booking
-
-↓
-
-Verify Seat Reduction
-```
-
-A reader should understand the workflow without studying implementation details.
-
----
-
-## Keep Setup Separate from Verification
-
-Use APIs, helper methods, or fixtures to prepare state.
-
-Reserve browser automation for validating user-visible behaviour.
-
-This keeps workflows fast and focused.
-
----
-
-## Build Reusable Business Components
-
-Instead of repeating implementation details across scenarios, encapsulate common operations:
-
-- Login
-- Booking creation
-- Order lookup
-- Navigation
-- Validation
-
-Reusable business helpers reduce maintenance and improve readability.
-
----
-
-# Best Practices
-
-✔ Structure workflows using `test.step()`.
-
-✔ Generate unique test data.
-
-✔ Reuse helper methods.
-
-✔ Verify business outcomes.
-
-✔ Separate setup from validation.
-
-✔ Keep scenarios independent.
-
-✔ Prefer meaningful assertions over UI implementation details.
-
----
-
-# Common Mistakes
-
-❌ Combining unrelated business workflows.
-
-❌ Hardcoding test data.
-
-❌ Repeating login logic.
-
-❌ Using arbitrary waits.
-
-❌ Validating only navigation instead of business state.
-
-❌ Ignoring negative business scenarios.
-
----
-
 # Selenium vs Playwright
 
 | Selenium | Playwright |
@@ -305,7 +124,7 @@ Playwright enables complete business workflows with significantly less boilerpla
 
 ---
 
-# Interview Corner
+# FAQ
 
 ## What makes a good end-to-end automation test?
 
@@ -334,8 +153,6 @@ Business rules.
 Not simply that buttons were clicked.
 
 ---
-
-# FAQ
 
 ### Should every test be end-to-end?
 
@@ -366,40 +183,5 @@ Avoid combining multiple independent scenarios into one large test.
 Absolutely.
 
 Well-designed helpers make workflows easier to understand and significantly reduce maintenance costs.
-
----
-
-# Future Recipes
-
-As this chapter grows, it will include:
-
-- Multi-user collaboration
-- Payment gateway workflows
-- Inventory management
-- Order cancellation
-- Refund processing
-- Approval workflows
-- Role-based access control
-- Shopping cart persistence
-- Email verification
-- Notification validation
-
----
-
-# Summary
-
-This chapter demonstrates how individual Playwright features combine to build production-quality automation.
-
-The scenarios cover:
-
-- Product ordering
-- Event management
-- Authorization
-- Refund validation
-- Network mocking
-- File processing
-- Page Object Model architecture
-
-Together, these examples showcase how to design automation that validates complete business behaviour rather than isolated UI interactions.
 
 ---

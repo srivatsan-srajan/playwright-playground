@@ -9,9 +9,9 @@ test('Text locator', async ({ page }) => {
   await page.getByRole('button', { name: 'Sign in' }).click();
 
   // wait and assert the error message is visible
-  // add a wait for the error message to appear, as it may take some time to show up
-  await page.waitForLoadState('networkidle');
-  expect (await page.getByText('credentials invalid')).toBeVisible();
+  await expect(
+    page.getByText('credentials invalid')
+  ).toBeVisible();
 });
 
 /**

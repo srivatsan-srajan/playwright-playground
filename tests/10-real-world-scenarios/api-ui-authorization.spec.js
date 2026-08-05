@@ -14,7 +14,7 @@ import { test, expect } from '@playwright/test';
  */
 
 const BASE_URL = 'https://eventhub.rahulshettyacademy.com';
-const API_URL  = 'https://api.eventhub.rahulshettyacademy.com/api';
+const API_URL = 'https://api.eventhub.rahulshettyacademy.com/api';
 
 const USERS = {
   yahoo: {

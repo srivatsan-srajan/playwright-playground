@@ -1,85 +1,6 @@
 # Page Object Model (POM)
 
-> **Engineering Cookbook – Chapter 11**
-
-As automation suites grow, maintaining locators and UI interactions directly inside test files quickly becomes difficult.
-
-The **Page Object Model (POM)** is one of the most widely adopted design patterns in UI automation. It separates page-specific implementation details from business workflows, resulting in cleaner, more maintainable, and reusable test code.
-
-This chapter demonstrates a complete Page Object Model implementation using Playwright, including a Page Object Manager that centralizes page creation and simplifies test composition.
-
----
-
-# Who Should Read This Chapter?
-
-✅ Automation Engineers
-
-✅ Framework Developers
-
-✅ SDETs
-
-✅ Selenium Engineers migrating to Playwright
-
-✅ Interview Candidates
-
----
-
-# Learning Objectives
-
-After completing this chapter you should be able to:
-
-- Understand the Page Object Model
-- Design reusable page classes
-- Encapsulate UI interactions
-- Build a Page Object Manager
-- Separate business workflows from page implementation
-- Create maintainable automation frameworks
-
----
-
-# Why Use the Page Object Model?
-
-Without POM:
-
-```
-Test
-
-↓
-
-Locators
-
-↓
-
-Actions
-
-↓
-
-Assertions
-```
-
-Every test duplicates implementation details.
-
-With POM:
-
-```
-Test
-
-↓
-
-Page Objects
-
-↓
-
-Playwright
-
-↓
-
-Application
-```
-
-Tests describe **business intent**, while page objects handle UI implementation.
-
----
+These page objects intentionally follow a straightforward implementation to illustrate the Page Object Model. Larger automation frameworks may introduce additional abstractions such as base page classes, dependency injection, or navigation patterns based on the team's needs.
 
 # Framework Architecture
 
@@ -232,80 +153,6 @@ The test itself becomes a readable description of the user journey rather than a
 
 ---
 
-# Engineering Insights
-
-## Tests Should Read Like Documentation
-
-Good:
-
-```javascript
-await loginPage.validLogin(username, password);
-
-await dashboardPage.searchProductAddCart(productName);
-
-await cartPage.Checkout();
-```
-
-Even someone unfamiliar with Playwright can understand the business flow.
-
----
-
-## Keep Assertions Close to the Business Flow
-
-Some assertions naturally belong inside page objects because they verify page-specific behaviour.
-
-Examples:
-
-- Product displayed in cart
-- Order confirmation
-- Email verification
-
-Other assertions—such as verifying an end-to-end business outcome—are often clearer when kept in the test itself.
-
-Aim for a balance: page objects should encapsulate page behaviour, while tests should express business intent.
-
----
-
-## Avoid "God" Page Objects
-
-A page object should represent one page or component.
-
-Avoid creating a single class that knows about the entire application.
-
-Smaller page objects are easier to maintain and reuse.
-
----
-
-# Best Practices
-
-✔ One page per class.
-
-✔ Keep locators private to page objects.
-
-✔ Expose business methods.
-
-✔ Reuse page objects across tests.
-
-✔ Use a Page Object Manager when the framework grows.
-
-✔ Keep page objects focused.
-
----
-
-# Common Mistakes
-
-❌ Putting assertions everywhere.
-
-❌ Exposing locators publicly.
-
-❌ Copying locators between tests.
-
-❌ Creating page objects with hundreds of methods.
-
-❌ Mixing unrelated pages into one class.
-
----
-
 # Selenium vs Playwright
 
 | Selenium | Playwright |
@@ -320,7 +167,7 @@ Playwright's `Locator` API naturally complements the Page Object Model because l
 
 ---
 
-# Interview Corner
+# FAQ
 
 ## Why use the Page Object Model?
 
@@ -348,8 +195,6 @@ It centralizes object creation, reduces boilerplate, and provides a single place
 
 ---
 
-# FAQ
-
 ### Should every application use a Page Object Manager?
 
 Not necessarily.
@@ -375,40 +220,3 @@ Generally, avoid tight coupling.
 Navigation methods can return the next page object if appropriate, but keeping orchestration in the test often results in clearer workflows.
 
 ---
-
-# Future Recipes
-
-This chapter will expand to include:
-
-- Component Object Model
-- Base Page
-- Fluent Page Objects
-- Page Object Fixtures
-- Dependency Injection
-- Generic Table Components
-- Modal Dialog Components
-- Navigation Components
-- Reusable Widgets
-
----
-
-# Summary
-
-This chapter demonstrates how to design a maintainable automation framework using the Page Object Model.
-
-Key concepts include:
-
-- Encapsulation
-- Separation of concerns
-- Reusable page classes
-- Centralized page management
-- Business-oriented APIs
-- Maintainable test architecture
-
-The Page Object Model is one of the most valuable design patterns in UI automation and forms the foundation of scalable Playwright and Selenium frameworks.
-
----
-
-➡ **Next Chapter:** Reporting & Test Execution
-
-Learn how to generate rich HTML reports, organize execution results, capture diagnostics, and integrate reporting into CI/CD pipelines.

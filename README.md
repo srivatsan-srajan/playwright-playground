@@ -1,241 +1,173 @@
 # Playwright Playground
 
-> A hands-on Playwright cookbook featuring practical recipes, real-world automation scenarios, best practices, and engineering insights.
+> A structured Playwright learning repository featuring practical examples, engineering best practices, reusable utilities, and real-world automation scenarios.
 
 ---
 
 ## Overview
 
-**Playwright Playground** is a curated collection of Playwright automation recipes built while learning and exploring Playwright through practical examples and real-world applications.
+**Playwright Playground** is a structured collection of Playwright examples designed to help developers and QA engineers learn Playwright progressively—from browser automation fundamentals to advanced automation patterns.
 
-Unlike repositories that simply replicate tutorial code, this project focuses on writing clean, maintainable, and production-oriented automation examples. Each recipe demonstrates one or more Playwright concepts and is organized into topic-based chapters for easy navigation.
-
-The goal is to build a reference repository that is useful not only while learning Playwright, but also as a long-term automation handbook.
+Rather than serving as a collection of isolated code snippets, the repository is organized into topic-based sections with detailed documentation, practical examples, and engineering insights that can be used as a long-term reference.
 
 ---
 
-## Objectives
+## Learning Approach
 
-This repository aims to:
+This repository is primarily inspired by the excellent **Playwright course by Rahul Shetty**.
 
-* Learn Playwright through practical examples.
-* Build a reusable reference for common automation tasks.
-* Showcase clean automation design and coding practices.
-* Demonstrate real-world end-to-end testing scenarios.
-* Document Playwright concepts in an organized manner.
-* Continuously improve tutorial examples with production-oriented practices.
+The folder structure broadly follows the learning progression of the course so that learners can easily navigate concepts in a familiar order.
+
+However, this repository is **not a direct copy** of the course material.
+
+Throughout the repository I have:
+
+- reorganized topics into a structured reference library
+- expanded every section with detailed documentation
+- added engineering notes, FAQs, and best practices
+- modified several examples to use alternative public applications where they better demonstrate a Playwright concept
+- refactored selected tests to showcase cleaner Playwright patterns
+- added original utilities and real-world automation scenarios beyond the course
+
+The goal is to preserve the learning journey while building a reusable Playwright reference repository.
 
 ---
 
-## Applications Used
+## Repository Highlights
 
-This repository primarily uses publicly available applications for learning and experimentation.
-
-* Rahul Shetty Academy – Login Practice
-* Rahul Shetty Academy – Client Application
-* Other public demo applications where appropriate
+- Progressive learning path from fundamentals to advanced topics
+- Detailed README for every section
+- 100+ practical Playwright examples
+- Real-world automation scenarios
+- API-assisted testing
+- Page Object Model implementation
+- Visual testing examples
+- Excel-based test data utilities
+- Framework configuration reference
+- CI/CD configuration examples
+- Environment configuration
+- Interview-friendly explanations and best practices
 
 ---
 
 ## Repository Structure
 
 ```text
-playwright-playground/
-
-README.md
-
-01-browser/
-02-locators/
-03-ui-controls/
-04-navigation/
-05-waits/
-06-popups/
-07-frames/
-08-api-testing/
-09-network/
-10-authentication/
-11-tables/
-12-file-handling/
-13-page-object-model/
-14-fixtures/
-15-reporting/
-16-ci-cd/
-17-design-patterns/
-18-real-world-scenarios/
-99-interview-preparation/
+01-basics
+02-locators
+03-authentication
+04-assertions
+05-timeouts
+06-browser-interactions
+07-api-assisted-testing
+08-visual-tests
+09-test-data-and-files
+10-real-world-scenarios
+11-page-object-model
+12-framework-configuration
+examples
+resources
 ```
 
----
+Each section contains:
 
-## Folder Structure
-
-Each topic follows a consistent structure.
-
-```text
-10-authentication/
-
-README.md
-FAQ.md
-
-01-invalid-login.spec.js
-02-successful-login.spec.js
-03-session-state.spec.js
-```
-
-### README.md
-
-Each folder contains a README describing:
-
-* Overview
-* Concepts covered
-* Playwright APIs used
-* Best practices
-* Common mistakes
-* Recipe index
-
-### FAQ.md
-
-Each folder also contains a FAQ document answering common questions encountered while learning that topic.
-
-Examples include:
-
-* Why use `toHaveText()` instead of `textContent()`?
-* When should `BrowserContext` be used?
-* Why avoid `waitForTimeout()`?
-* CSS vs XPath vs `getByRole()`
+- Practical examples
+- Detailed README
+- Best practices
+- Common pitfalls
+- Engineering notes
+- Playwright APIs used
 
 ---
 
-## Recipe Format
+## Who is this repository for?
 
-Each recipe begins with a short header describing its purpose.
+This repository is intended for:
 
-```javascript
-/**
- * Recipe: Invalid Login
- * Concepts: Navigation, Authentication, Assertions
- * Application: Rahul Shetty Academy - Login Practice
- */
-```
-
-The recipe focuses on the implementation, while detailed explanations are documented in the corresponding README and FAQ.
-
----
-
-## Coding Principles
-
-The examples in this repository follow a few simple principles.
-
-* Prefer readability over cleverness.
-* Demonstrate one primary concept per recipe whenever possible.
-* Keep recipes small and focused.
-* Use meaningful locator names.
-* Prefer Playwright's web-first assertions.
-* Avoid unnecessary waits.
-* Prefer semantic locators where appropriate.
-* Build examples that resemble real-world automation.
-
----
-
-## Learning Roadmap
-
-| Status | Topic                 |
-| ------ | --------------------- |
-| 🚧     | Browser               |
-| 🚧     | Authentication        |
-| ⬜      | Locators              |
-| ⬜      | UI Controls           |
-| ⬜      | Navigation            |
-| ⬜      | Waits                 |
-| ⬜      | Popups                |
-| ⬜      | Frames                |
-| ⬜      | API Testing           |
-| ⬜      | Network               |
-| ⬜      | Tables                |
-| ⬜      | File Handling         |
-| ⬜      | Page Object Model     |
-| ⬜      | Fixtures              |
-| ⬜      | Reporting             |
-| ⬜      | CI/CD                 |
-| ⬜      | Design Patterns       |
-| ⬜      | Real-World Scenarios  |
-| ⬜      | Interview Preparation |
+- Developers learning Playwright
+- QA Engineers transitioning from Selenium
+- Automation Engineers looking for practical examples
+- Engineers preparing for Playwright interviews
+- Teams building or modernizing Playwright automation frameworks
 
 ---
 
 ## Technology Stack
 
-* Playwright
-* JavaScript
-* Node.js
-* Visual Studio Code
+- Playwright
+- JavaScript
+- Node.js
+- ExcelJS
+- GitHub Actions
+- Azure Pipelines
 
 ---
 
-## Running the Project
+## Getting Started
 
-Install dependencies:
+Clone the repository
+
+```bash
+git clone https://github.com/srivatsan-srajan/playwright-playground.git
+cd playwright-playground
+```
+
+Install dependencies
 
 ```bash
 npm install
 ```
 
-Install Playwright browsers:
+Install Playwright browsers
 
 ```bash
-npx playwright install
+npm run install:browsers
 ```
 
-Run all tests:
+Run all tests
 
 ```bash
-npx playwright test
+npm test
 ```
 
-Run a specific test:
+Run headed
 
 ```bash
-npx playwright test tests/10-authentication/01-invalid-login.spec.js
+npm run headed
 ```
 
-Run tests in headed mode:
+Open Playwright UI
 
 ```bash
-npx playwright test --headed
+npm run ui
 ```
 
-Open the HTML report:
+View HTML report
 
 ```bash
-npx playwright show-report
+npm run report
 ```
 
 ---
 
 ## Repository Philosophy
 
-This repository is not intended to be a copy of any course.
+This repository documents my journey of learning Playwright while gradually evolving tutorial examples into production-oriented automation patterns.
 
-Instead, it serves as a personal learning companion that expands upon tutorial examples by:
+The emphasis is not only on **how** to use Playwright APIs, but also on **why** certain approaches are preferred, when they should be used, and how they fit into real automation projects.
 
-* Writing cleaner code.
-* Applying engineering best practices.
-* Organizing examples by concept rather than lesson order.
-* Building reusable automation recipes.
-* Capturing practical knowledge through documentation and FAQs.
-
-The emphasis is on understanding **why** a particular Playwright feature or approach is preferred—not just **how** to use it.
+As the repository grows, it will continue to evolve with newer Playwright features, improved engineering practices, and additional real-world examples.
 
 ---
 
 ## Contributing
 
-Suggestions, improvements, and discussions are always welcome.
+Suggestions, corrections, and discussions are always welcome.
 
-If you notice a better Playwright approach or an opportunity to improve a recipe, feel free to open an issue or submit a pull request.
+If you find a better Playwright approach or identify an opportunity to improve a recipe or explanation, feel free to open an issue or submit a pull request.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License.
+Licensed under the MIT License.

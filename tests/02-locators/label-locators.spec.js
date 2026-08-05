@@ -1,30 +1,28 @@
 import { test, expect } from '@playwright/test';
-import { assert } from 'node:console';
+
 
 test('Label locators', async ({ page }) => {
-let pageURL = "https://rahulshettyacademy.com/angularpractice/";
+    let pageURL = "https://rahulshettyacademy.com/angularpractice/";
 
-await page.goto(pageURL);
+    await page.goto(pageURL);
 
-// identify a component by label and intelligently click it 
+    // identify a component by label and intelligently click it 
 
-// checkbox & radio
-await page.getByLabel("Check me out if you Love IceCreams!").check();
-await page.getByLabel("Student").check();
+    // checkbox & radio
+    await page.getByLabel("Check me out if you Love IceCreams!").check();
+    await page.getByLabel("Student").check();
 
-// identify drodown by label and selectOption
-await page.getByLabel("Gender").selectOption("Male");
+    // identify drodown by label and selectOption
+    await page.getByLabel("Gender").selectOption("Male");
 
-// verify selection
-await expect(page.getByLabel("Check me out if you Love IceCreams!")).toBeChecked();
-await expect (page.getByLabel("Student")).toBeChecked();
-await expect(page.getByLabel("Gender")).toHaveValue("Male");
-  
+    // verify selection
+    await expect(page.getByLabel("Check me out if you Love IceCreams!")).toBeChecked();
+    await expect(page.getByLabel("Student")).toBeChecked();
+    await expect(page.getByLabel("Gender")).toHaveValue("Male");
+
 });
 
 /**
- *  getByLabel is not efficient for ui controls that need to be typed in to, like textBoxes
- * apply when click action is involved on the resultant component
- * 
- * works in a text component if its properly grouped or if the for/id attributes match
+ *  getByLabel() is primarily intended for form controls associated with accessible labels. 
+ *  For text fields, it works well when the input has a proper <label> association.
  */

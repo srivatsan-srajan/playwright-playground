@@ -2,11 +2,11 @@ import { test, expect } from '@playwright/test';
 
 test('independent browser contexts', async ({ browser }) => {
 
-  const admin = await browser.newContext();
-  const customer = await browser.newContext();
+  const adminContext = await browser.newContext();
+  const customerContext = await browser.newContext();
 
-  const adminPage = await admin.newPage();
-  const customerPage = await customer.newPage();
+  const adminPage = await adminContext.newPage();
+  const customerPage = await customerContext.newPage();
 
   await adminPage.goto('https://example.com');
   await customerPage.goto('https://playwright.dev/');

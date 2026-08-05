@@ -1,79 +1,5 @@
 # Test Data & Files
 
-> **Engineering Cookbook – Chapter 09**
-
-Real-world automation frameworks rarely rely on hardcoded values.
-
-Instead, they load, manipulate, and persist data from external sources such as Excel workbooks, JSON documents, CSV files, configuration files, downloads, and uploads.
-
-This chapter demonstrates how to build a reusable data access layer that keeps test code clean while centralizing all file operations into well-designed utility classes.
-
-Rather than scattering file manipulation throughout the automation suite, the framework exposes a simple API that can be reused across hundreds of tests.
-
----
-
-# Who Should Read This Chapter?
-
-✅ Automation Engineers
-
-✅ Playwright Engineers
-
-✅ SDETs
-
-✅ Framework Developers
-
-✅ Interview Candidates
-
----
-
-# Learning Objectives
-
-After completing this chapter you should be able to:
-
-- Build reusable utility classes
-- Read and update Excel workbooks
-- Search worksheets dynamically
-- Append new rows
-- Read complete worksheets
-- Read individual rows and columns
-- Encapsulate third-party libraries
-- Design reusable data-access APIs
-
----
-
-# Why Test Data Matters
-
-Most enterprise automation frameworks separate **test logic** from **test data**.
-
-Instead of writing:
-
-```javascript
-await page.fill('#username', 'admin');
-await page.fill('#password', 'Password123');
-```
-
-data is loaded from an external source.
-
-```
-Tests
-
-↓
-
-Test Data Layer
-
-↓
-
-Excel / JSON / CSV
-
-↓
-
-Application
-```
-
-This separation improves maintainability, reuse, and readability.
-
----
-
 # Architecture
 
 This chapter demonstrates a layered architecture.
@@ -273,118 +199,6 @@ This significantly simplifies test code.
 
 ---
 
-# Engineering Insights
-
-## Tests Should Express Intent
-
-Good:
-
-```javascript
-await ExcelUtils.updateValue({
-    filePath,
-    sheetName,
-    searchText,
-    replaceText
-});
-```
-
-Poor:
-
-```javascript
-Load Workbook
-
-↓
-
-Loop Rows
-
-↓
-
-Loop Columns
-
-↓
-
-Update Cell
-
-↓
-
-Save Workbook
-```
-
-The first communicates **what** the test is trying to accomplish.
-
-The second exposes unnecessary implementation details.
-
----
-
-## Encapsulate Third-Party Libraries
-
-Tests should never depend directly on ExcelJS.
-
-Instead:
-
-```
-Tests
-
-↓
-
-ExcelUtils
-
-↓
-
-ExcelJS
-```
-
-If the underlying library changes in the future, only the utility layer requires modification.
-
----
-
-## Small APIs Scale Better
-
-The utility exposes focused methods such as:
-
-- `readCell()`
-- `findCell()`
-- `updateCell()`
-- `appendRow()`
-
-Each method performs one task well, making the API predictable and easy to extend. :contentReference[oaicite:10]{index=10}
-
----
-
-# Best Practices
-
-✔ Keep test data separate from test logic.
-
-✔ Encapsulate file operations.
-
-✔ Throw meaningful exceptions.
-
-✔ Build reusable helper classes.
-
-✔ Keep public APIs small and focused.
-
-✔ Validate worksheet existence before use.
-
-✔ Reuse utilities across multiple frameworks.
-
----
-
-# Common Mistakes
-
-❌ Embedding ExcelJS code directly inside Playwright tests.
-
-❌ Hardcoding row numbers.
-
-❌ Repeating workbook loading logic.
-
-❌ Forgetting to save changes.
-
-❌ Ignoring missing worksheet errors.
-
-❌ Mixing business logic with file manipulation.
-
----
-
 # Selenium vs Playwright
 
 This chapter is intentionally framework-independent.
@@ -400,7 +214,7 @@ Good utility libraries should not depend on the automation framework.
 
 ---
 
-# Interview Corner
+# FAQ
 
 ## Why build an `ExcelUtils` class?
 
@@ -425,8 +239,6 @@ Spreadsheets evolve. Searching makes tests more resilient to structural changes.
 Fail fast with a descriptive error rather than allowing unrelated operations to fail later.
 
 ---
-
-# FAQ
 
 ### Why not use ExcelJS directly in every test?
 
@@ -458,42 +270,3 @@ No.
 Utility libraries should remain independent of the test framework wherever possible.
 
 ---
-
-# Future Recipes
-
-As this chapter grows, it will include:
-
-- JSON utilities
-- CSV utilities
-- YAML parsing
-- XML processing
-- PDF reading
-- ZIP extraction
-- File downloads
-- File uploads
-- Image comparison helpers
-- Environment configuration management
-
----
-
-# Summary
-
-This chapter demonstrates how to design a reusable **test data management layer** rather than simply reading Excel files.
-
-Key capabilities include:
-
-- Workbook management
-- Worksheet access
-- Reading and updating cells
-- Dynamic searching
-- Row appending
-- Convenience APIs
-- Encapsulation of third-party libraries
-
-These patterns form the foundation of scalable automation frameworks and can be reused across Playwright, Selenium, Cypress, or any other UI automation technology.
-
----
-
-➡ **Next Chapter:** Realworld Examples
-
-Learn how to capture screenshots, perform visual regression testing, and use snapshot comparisons to detect unexpected UI changes.

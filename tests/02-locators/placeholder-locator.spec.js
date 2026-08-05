@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('Placeholder locator', async ({ page }) => {
   await page.goto('https://demo.realworld.show/login');
-  
+
   const input = page.getByPlaceholder('Email');
   await input.fill('foo@bar.com');
 

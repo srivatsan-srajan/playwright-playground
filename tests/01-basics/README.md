@@ -1,30 +1,6 @@
-
 # Playwright Basics
 
-> The foundation for every Playwright test.
-
----
-
-## Why This Chapter Exists
-
-Every automation framework has a learning curve. Before exploring advanced topics such as API testing, network mocking, authentication, or real-world scenarios, it is important to understand the core building blocks that every Playwright test is composed of.
-
-This chapter introduces those building blocks and establishes the terminology used throughout the repository.
-
----
-
-# Learning Objectives
-
-After completing this chapter you should be able to:
-
-- Understand the Playwright Test Runner
-- Explain the Browser → BrowserContext → Page hierarchy
-- Navigate to web pages
-- Interact with elements
-- Execute assertions
-- Write clean asynchronous Playwright tests
-
----
+Playwright manages browser lifecycle automatically when using fixtures.
 
 # Playwright Architecture
 
@@ -109,15 +85,6 @@ await expect(page).toHaveTitle(/Example/);
 
 ---
 
-# Interview Questions
-
-1. What is BrowserContext?
-2. Why are Playwright tests asynchronous?
-3. Why are Playwright tests generally less flaky than Selenium tests?
-4. What is the difference between Browser, BrowserContext and Page?
-
----
-
 # FAQ
 
 **Why does Playwright use BrowserContext?**
@@ -129,7 +96,3 @@ To provide complete isolation between tests without launching a new browser ever
 Yes. Independent tests are easier to maintain and execute in parallel.
 
 ---
-
-# Next Chapter
-
-Continue with **02 - Locators**, where you'll learn the locator strategies that make Playwright tests reliable and readable.

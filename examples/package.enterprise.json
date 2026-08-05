@@ -1,0 +1,99 @@
+{
+  "name": "playwright-playground",
+  "version": "1.0.0",
+  "description": "A practical Playwright learning repository with real-world examples, patterns, and best practices.",
+  "author": "Srivatsan Sundararajan",
+  "license": "MIT",
+  "private": true,
+
+  "scripts": {
+
+    "// -----------------------------------------------------": "",
+
+    "// Basic Execution": "",
+
+    "test": "playwright test",
+    "headed": "playwright test --headed",
+    "debug": "playwright test --debug",
+    "ui": "playwright test --ui",
+    "report": "playwright show-report",
+
+    "// -----------------------------------------------------": "",
+
+    "// Browser Specific": "",
+
+    "chrome": "playwright test --project=Chromium",
+    "firefox": "playwright test --project=Firefox",
+    "webkit": "playwright test --project=WebKit",
+
+    "// -----------------------------------------------------": "",
+
+    "// Tags": "",
+
+    "smoke": "playwright test --grep @smoke",
+    "sanity": "playwright test --grep @sanity",
+    "regression": "playwright test --grep @regression",
+    "critical": "playwright test --grep @critical",
+    "api": "playwright test --grep @api",
+    "ui-tests": "playwright test --grep @ui",
+
+    "// -----------------------------------------------------": "",
+
+    "// Mobile": "",
+
+    "iphone": "playwright test --project=\"iPhone 15\"",
+    "pixel": "playwright test --project=\"Pixel 8\"",
+
+    "// -----------------------------------------------------": "",
+
+    "// Environments": "",
+
+    "qa": "cross-env ENV=qa playwright test",
+    "staging": "cross-env ENV=staging playwright test",
+    "prod": "cross-env ENV=production playwright test",
+
+    "// -----------------------------------------------------": "",
+
+    "// Smoke Per Environment": "",
+
+    "qa:smoke": "cross-env ENV=qa playwright test --grep @smoke",
+    "staging:smoke": "cross-env ENV=staging playwright test --grep @smoke",
+    "prod:smoke": "cross-env ENV=production playwright test --grep @smoke",
+
+    "// -----------------------------------------------------": "",
+
+    "// CI": "",
+
+    "ci": "playwright test --reporter=dot",
+    "ci:smoke": "playwright test --grep @smoke --reporter=dot",
+    "ci:regression": "playwright test --grep @regression --reporter=dot",
+
+    "// -----------------------------------------------------": "",
+
+    "// Utilities": "",
+
+    "install:browsers": "playwright install",
+    "install:deps": "playwright install --with-deps",
+    "codegen": "playwright codegen",
+    "trace": "playwright show-trace",
+
+    "// -----------------------------------------------------": "",
+
+    "// Maintenance": "",
+
+    "lint": "eslint .",
+    "format": "prettier --write ."
+
+  },
+
+  "devDependencies": {
+
+    "@playwright/test": "^1.55.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^17.2.1",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0"
+
+  }
+
+}

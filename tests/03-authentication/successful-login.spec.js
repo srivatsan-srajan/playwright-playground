@@ -4,17 +4,20 @@
  * Application: Rahul Shetty Academy - Login Practice
  */
 
-const {test, expect} = require("@playwright/test");
+const { test, expect } = require("@playwright/test");
 
-test("Successful Login", async ({browser})=>{
-const context = await browser.newContext();
-const page = await context.newPage();
-await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
-await expect(page).toHaveTitle("LoginPage Practise | Rahul Shetty Academy");
-await page.locator('#username').fill("rahulshettyacademy");
-await page.locator('#password').fill("Learning@830$3mK2");
-await page.locator('#terms').check();
-await page.locator('#signInBtn').click();
-console.log(await page.locator('.card-body a').allTextContents());
+test("Successful Login", async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    await expect(page).toHaveTitle("LoginPage Practise | Rahul Shetty Academy");
+    await page.locator('#username').fill("rahulshettyacademy");
+    await page.locator('#password').fill("Learning@830$3mK2");
+    await page.locator('#terms').check();
+    await page.locator('#signInBtn').click();
+    console.log(await page.locator('.card-body a').allTextContents());
+    await expect(
+        page.locator('.card-body')
+    ).toHaveCountGreaterThan(0);
 
 });

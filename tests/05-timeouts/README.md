@@ -109,38 +109,6 @@ Individual tests can override them whenever necessary.
 
 ---
 
-# Engineering Recommendation
-
-Prefer the smallest scope possible.
-
-Good
-
-```
-Local Assertion Timeout
-```
-
-Better than
-
-```
-Huge Global Timeout
-```
-
-because only the slow assertion receives additional waiting time.
-
----
-
-# Common Mistakes
-
-❌ Increasing every timeout to 60 seconds
-
-❌ Using `waitForTimeout()`
-
-❌ Increasing global timeout instead of fixing slow locators
-
-❌ Masking performance issues by adding longer waits
-
----
-
 # Selenium Comparison
 
 | Selenium | Playwright |
@@ -152,7 +120,7 @@ because only the slow assertion receives additional waiting time.
 
 ---
 
-# Interview Question
+# FAQ
 
 ### Which timeout should be increased first?
 
@@ -160,14 +128,4 @@ The local assertion timeout.
 
 Increase the timeout closest to the operation that requires additional waiting before changing global project settings.
 
----
-
-💡 Engineering Insight
-
-Timeouts should compensate for **legitimate application latency**, not unreliable locators or unstable tests.
-
-If increasing a timeout fixes a test, ask:
-
-- Is the locator reliable?
-- Is the application genuinely slow?
-- Is there a better state to wait for?
+---s

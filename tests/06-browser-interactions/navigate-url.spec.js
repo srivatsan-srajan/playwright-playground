@@ -10,6 +10,4 @@ test('Navigate to URL', async ({ page }) => {
   await page.goForward();
   await expect(page).toHaveURL(/github/);
 
-
-  
 });

@@ -1,15 +1,5 @@
 # Playwright Locators
 
-> **Engineering Cookbook – Chapter 2**
-
-Locators are the heart of every Playwright test. Good locator strategy is the difference between a stable automation suite and one that constantly breaks after UI changes.
-
----
-
-# Why Locators Matter
-
-Playwright encourages locating elements the way **users interact with them**, not the way the DOM happens to be structured today. Whenever possible, choose semantic locators over implementation details.
-
 ## Recommended Locator Priority
 
 | Priority | Locator | Typical Usage |
@@ -38,18 +28,6 @@ Playwright encourages locating elements the way **users interact with them**, no
 | `testid.spec.js` | Review this recipe for the locator technique demonstrated. |
 | `text-locators.spec.js` | Review this recipe for the locator technique demonstrated. |
 | `xpath.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `chaining-locators.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `css-locators.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `label-locators.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `locator-filter.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `nth-match.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `placeholder-locator.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `role-locators.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `testid.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `text-locators.spec.js` | Review this recipe for the locator technique demonstrated. |
-| `xpath.spec.js` | Review this recipe for the locator technique demonstrated. |
-
-> As more recipes are added, this table becomes the chapter index.
 
 ---
 
@@ -133,17 +111,6 @@ await frame.getByRole('button', { name: 'Close' }).click();
 | Stale element issues | Lazy locator evaluation |
 
 ---
-
-# Interview Questions
-
-1. Why are Playwright locators considered more reliable?
-2. What is strict mode?
-3. When should `getByTestId()` be introduced?
-4. Why avoid absolute XPath?
-5. What problems does lazy locator evaluation solve?
-
----
-
 # FAQ
 
 **Should I always use CSS?**  
@@ -153,5 +120,3 @@ No. Prefer semantic locators first.
 Because `Locator` objects resolve elements only when actions or assertions execute.
 
 ---
-
-➡ **Next:** Authentication

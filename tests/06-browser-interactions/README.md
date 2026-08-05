@@ -1,38 +1,5 @@
 # Browser Interactions
 
-> Engineering Cookbook – Chapter 06
-
-Modern web applications rely heavily on browser features beyond simple buttons and text boxes. As automation engineers, we frequently interact with browser history, pop-up windows, dialogs, frames, and mouse events.
-
-This chapter demonstrates how Playwright simplifies these browser interactions using built-in APIs while maintaining reliable and readable automation.
-
----
-
-# Who Should Read This Chapter?
-
-✅ Engineers learning Playwright
-
-✅ Selenium engineers migrating to Playwright
-
-✅ QA engineers building robust UI automation
-
-✅ Interview candidates preparing for advanced Playwright topics
-
----
-
-# Learning Objectives
-
-After completing this chapter you should be able to:
-
-- Navigate browser history
-- Handle child windows and tabs
-- Work with JavaScript dialogs
-- Automate iframe interactions
-- Simulate hover actions
-- Synchronize browser events correctly
-
----
-
 # Browser Interaction Overview
 
 ```
@@ -148,71 +115,6 @@ Always assert the UI state after hovering instead of assuming the action succeed
 
 ---
 
-# Engineering Insights
-
-## Synchronize Events Correctly
-
-Browser events should be awaited before triggering the action.
-
-Good:
-
-```javascript
-await Promise.all([
-    context.waitForEvent('page'),
-    link.click()
-]);
-```
-
-Poor:
-
-```javascript
-await link.click();
-await context.waitForEvent('page');
-```
-
-The event may already have occurred.
-
----
-
-## Assert Outcomes
-
-Don't stop after performing an interaction.
-
-Verify:
-
-- URL changes
-- Visible content
-- Dialog results
-- Updated page state
-
----
-
-# Best Practices
-
-✔ Use `frameLocator()` for iframe interactions.
-
-✔ Register dialog handlers before user actions when appropriate.
-
-✔ Wait for browser events using `Promise.all()`.
-
-✔ Validate browser state after navigation.
-
-✔ Keep browser interaction tests focused on one feature.
-
----
-
-# Common Mistakes
-
-❌ Forgetting to wait for new pages.
-
-❌ Clicking before registering dialog handlers.
-
-❌ Using arbitrary waits.
-
-❌ Mixing unrelated browser interactions in one test.
-
----
-
 # Selenium vs Playwright
 
 | Selenium | Playwright |
@@ -272,38 +174,3 @@ No. `frameLocator()` automatically scopes interactions to the frame.
 Yes. Verify the destination using URL, title, or page content.
 
 ---
-
-# Future Recipes
-
-As this repository grows, this chapter will include:
-
-- Drag and Drop
-- Right Click (Context Menu)
-- Double Click
-- Keyboard Shortcuts
-- File Upload
-- File Download
-- Clipboard Operations
-- Geolocation
-- Permissions
-- Multiple Browser Tabs
-
----
-
-# Summary
-
-This chapter introduced the most common browser interactions used in UI automation:
-
-- Navigation
-- Child Windows
-- JavaScript Dialogs
-- Frames
-- Hover Actions
-
-These techniques are essential for automating modern web applications that extend beyond basic form interactions.
-
----
-
-➡ **Next Chapter:** API Testing / Network Mocking
-
-You'll learn how to interact directly with backend services, combine API and UI testing, and build faster, more reliable automation suites.

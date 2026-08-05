@@ -7,8 +7,7 @@ test('Handle iFrame', async ({ page }) => {
 
     const iframe = page.frameLocator('iframe[title="Rich Text Area"]');
     await page.on('dialog', dialog => dialog.dismiss());
-    await page.getByRole('button', {'name':"Close"}).click();
-    await frame.locator('#tinymce').fill('Hello Playwright!');
+    await page.getByRole('button', { 'name': "Close" }).click();
+    await iframe.locator('#tinymce').fill('Hello Playwright!');
 
-    
 });

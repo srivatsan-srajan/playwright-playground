@@ -4,13 +4,15 @@ test('handle popup window', async ({ page, context }) => {
 
   await page.goto('https://example.com');
 
-  const popupPromise=context.waitForEvent('page');
+  const popupPromise = context.waitForEvent('page');
 
   await page.evaluate(() => {
+    // In real applications, popups are usually triggered by clicking a link or button 
+    // rather than calling window.open() directly.
     window.open('https://playwright.dev/');
   });
 
-  const popup=await popupPromise;
+  const popup = await popupPromise;
 
   await popup.waitForLoadState();
 

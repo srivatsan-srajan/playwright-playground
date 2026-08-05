@@ -1,6 +1,7 @@
 const ExcelUtils = require("./excel-utils");
 
-const FILE_PATH = "../resources/excel-sample.xlsx";
+const path = require('path');
+const FILE_PATH = path.join(__dirname, '../../resources/excel-sample.xlsx');
 const SHEET_NAME = "Sheet1";
 
 (async () => {

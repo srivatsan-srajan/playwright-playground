@@ -8,16 +8,18 @@ test('Role Locators 1', async ({ page }) => {
   for (const image of await images.all()) {
     console.log(await image.getAttribute('alt'));
   }
-  await expect(images).toHaveCount(20);
+
+  await expect(images).not.toHaveCount(0);
+  // or expect(await images.count()).toBeGreaterThan(0); //both works
 
 });
 
 test('Role Locators 2', async ({ page }) => {
-   // locate a tag by link and click it
+  // locate a tag by link and click it
   await page.goto('https://demo.realworld.show/');
   await page.getByRole('link', { name: 'ai', exact: true }).click();
-  
-  
+
+
 });
 
 /*

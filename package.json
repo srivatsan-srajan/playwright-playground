@@ -1,16 +1,33 @@
 {
   "name": "playwright-playground",
   "version": "1.0.0",
-  "description": "> A hands-on Playwright cookbook featuring practical recipes, real-world automation scenarios, best practices, and engineering insights.",
-  "main": "index.js",
-  "scripts": {},
+  "description": "A hands-on Playwright cookbook featuring practical recipes, real-world automation scenarios, best practices, and engineering insights.",
+  "scripts": {
+    "test": "playwright test",
+    "headed": "playwright test --headed",
+    "debug": "playwright test --debug",
+    "ui": "playwright test --ui",
+    "codegen": "playwright codegen",
+    "report": "playwright show-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/srivatsan-srajan/playwright-playground.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing",
+    "qa",
+    "javascript",
+    "e2e",
+    "ui-testing",
+    "api-testing",
+    "playwright-test",
+    "engineering"
+  ],
+  "author": "Srivatsan Sundararajan",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/srivatsan-srajan/playwright-playground/issues"

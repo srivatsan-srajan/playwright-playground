@@ -12,7 +12,7 @@ test('Assert visible', async ({ page }) => {
   // add a wait for the error message to appear, as it may take some time to show up
 
   // see text-locator.spec.js for a different approach to wait for the error message to appear
-  await expect (page.getByText('credentials invalid')).toBeVisible({timeout: 30_000});
+  await expect(page.getByText('credentials invalid')).toBeVisible({ timeout: 30_000 });
 });
 
 /**
