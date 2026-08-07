@@ -7,7 +7,27 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+
+    "test:chrome": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+
+    "test:e2e": "playwright test tests/e2e-flow-page-objects.spec.ts",
+    "test:order": "playwright test tests/place-product-order.spec.ts",
+    "test:event": "playwright test tests/event-booking-sample.spec.ts",
+    "test:refund": "playwright test tests/refund-eligibility-check.spec.ts",
+    "test:auth": "playwright test tests/api-ui-authorization.spec.ts",
+    "test:mock": "playwright test tests/conditional-banner-api-example.spec.ts",
+    "test:excel": "playwright test tests/read-write-from-excel.spec.ts",
+
+    "report": "playwright show-report",
+
+    "codegen": "playwright codegen",
+    "install:browsers": "playwright install"
   },
   "keywords": [],
   "author": "",
