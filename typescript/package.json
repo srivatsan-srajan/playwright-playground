@@ -16,6 +16,10 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.1.2",
+    "exceljs": "^4.4.0",
     "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }

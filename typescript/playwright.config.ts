@@ -1,4 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load environment variables
+dotenv.config({
+    path: path.resolve(__dirname, '../resources/.env.qa')
+});
+
 
 export default defineConfig({
 
