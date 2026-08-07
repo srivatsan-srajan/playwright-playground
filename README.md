@@ -38,6 +38,7 @@ The goal is to preserve the learning journey while building a reusable Playwrigh
 - Progressive learning path from fundamentals to advanced topics
 - Detailed README for every section
 - 100+ practical Playwright examples
+ - JavaScript and TypeScript Playwright implementation
 - Real-world automation scenarios
 - API-assisted testing
 - Page Object Model implementation
@@ -67,6 +68,11 @@ The goal is to preserve the learning journey while building a reusable Playwrigh
 12-framework-configuration
 examples
 resources
+typescript/
+    ├── tests/
+    ├── pages/
+    ├── utils/
+    └── README.md
 ```
 
 Each section contains:
@@ -96,6 +102,7 @@ This repository is intended for:
 
 - Playwright
 - JavaScript
+- TypeScript
 - Node.js
 - ExcelJS
 - GitHub Actions
@@ -152,6 +159,23 @@ npm run report
 > Most examples run out of the box. Tests that interact with authenticated demo applications require valid credentials in `resources/.env.qa` before they can be executed successfully.
 
 ---
+
+## TypeScript Implementation
+
+In addition to the JavaScript examples, this repository now includes a dedicated **TypeScript implementation** located under the `typescript/` directory.
+
+The TypeScript module demonstrates:
+
+- Strongly typed Page Object Model
+- Typed models, interfaces, and enums
+- Reusable utility classes
+- API and UI automation
+- Network mocking
+- Excel automation
+- End-to-end business scenarios
+- Modern Playwright + TypeScript project structure
+
+📁 See [`typescript/README.md`](./typescript/README.md) for complete documentation.
 
 ## Repository Philosophy
 
